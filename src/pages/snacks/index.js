@@ -18,16 +18,6 @@ const Snacks = ({ route, navigation }) => {
     }
   };
 
-  const loadCartData = async () => {
-    try {
-      const cartData = await AsyncStorage.getItem(STORAGE_KEY);
-      return cartData ? JSON.parse(cartData) : null;
-    } catch (error) {
-      console.error('Erro ao carregar o carrinho', error);
-      return null;
-    }
-  };
-
   const handleQuantityChange = async (snack, amount) => {
     const newSnacks = [...snacks];
     const snackIndex = newSnacks.findIndex((item) => item.name === snack.name);
@@ -40,13 +30,6 @@ const Snacks = ({ route, navigation }) => {
       setSnacks(newSnacks);
       await saveCartData({ snacks: newSnacks, tickets });
     }
-  };
-
-  const handleRemoveSnack = async (index) => {
-    const newSnacks = [...snacks];
-    newSnacks.splice(index, 1);
-    setSnacks(newSnacks);
-    await saveCartData({ snacks: newSnacks, tickets });
   };
 
   const handleAddSnack = async (snack) => {

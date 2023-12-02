@@ -9,7 +9,6 @@ import {
   POSTER_BASE_URL,
 } from '../../services/api';
 
-const STORAGE_KEY_TICKETS = '@ticketsData';
 const STORAGE_KEY_CART = '@cartData';
 
 const Tickets = ({ navigation, route }) => {
@@ -24,32 +23,11 @@ const Tickets = ({ navigation, route }) => {
     { name: 'Entrada Inteira', price: 30 },
   ];
 
-  const saveTicketsData = async (ticketsData) => {
-    try {
-      await AsyncStorage.setItem(
-        STORAGE_KEY_TICKETS,
-        JSON.stringify(ticketsData)
-      );
-    } catch (error) {
-      console.error('Error saving tickets data', error);
-    }
-  };
-
   const saveCartData = async (cartData) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY_CART, JSON.stringify(cartData));
     } catch (error) {
       console.error('Error saving cart data', error);
-    }
-  };
-
-  const loadTicketsData = async () => {
-    try {
-      const ticketsData = await AsyncStorage.getItem(STORAGE_KEY_TICKETS);
-      return ticketsData ? JSON.parse(ticketsData) : null;
-    } catch (error) {
-      console.error('Error loading tickets data', error);
-      return null;
     }
   };
 
